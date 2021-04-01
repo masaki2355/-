@@ -44,7 +44,7 @@
         ms = ('0' + ms).slice(-3);
 
         //HTMLのid　timer部分に表示させる　
-        timer.textContent = m + ':' + s + ':'  + ms;
+        timer.textContent = m + ':' + s + ':' + ms;
     }
 
 
@@ -67,7 +67,10 @@
 
     //startボタンにクリック時のイベントを追加(タイマースタートイベント)
     start.addEventListener('click',function(){
-
+        
+        start.disabled = true; 
+        stop.disabled = false; 
+        reset.disabled = true;
         //在時刻を示すDate.nowを代入
         startTime = Date.now();
 
@@ -77,7 +80,9 @@
 
     //stopボタンにクリック時のイベントを追加(タイマーストップイベント)
     stop.addEventListener('click',function(){
-
+       stop.disabled = true; 
+       start.disabled = false; 
+       reset.disabled = false;
         //タイマーを止めるにはclearTimeoutを使う必要があり、そのためにはclearTimeoutの引数に渡すためのタイマーのidが必要
        clearTimeout(timerId);
 
@@ -90,7 +95,8 @@
 
     //resetボタンにクリック時のイベントを追加(タイマーリセットイベント)
     reset.addEventListener('click',function(){
-
+        reset.disabled = true;
+        start.disabled = false;
         //経過時刻を更新するための変数elapsedTimeを0にしてあげつつ、updateTimetTextで0になったタイムを表示。
         elapsedTime = 0;
 
